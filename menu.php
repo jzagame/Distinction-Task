@@ -4,9 +4,9 @@
     <li class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Menu</a>
         <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="AddRestaurantMenu.php">Add Menu</a>
+            <a href="#">Edit Menu</a>
+            <a href="#">View Menu</a>
         </div>
     </li>
     <li class="dropdown">
