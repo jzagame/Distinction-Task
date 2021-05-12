@@ -19,12 +19,12 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">
-                Dropdown link
+                Reserve Table
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Link 1</a>
-                <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
+                <a class="dropdown-item" href="AddTable.php">Add Table</a>
+                <a class="dropdown-item" href="#">Reserve Table</a>
+                <a class="dropdown-item" href="#">Edit Reservation</a>
             </div>
         </li>
 
