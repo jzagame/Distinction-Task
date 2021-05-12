@@ -64,6 +64,10 @@
         <div class="w3-col l6 w3-padding-large">
             <form action="login_process.php" method="post">
                 <h1 class="w3-center">Login</h1><br>
+
+                <?php
+                if (isset($_GET['error'])) { }
+                ?>
             
                 <label><h4>Username</h4></label>
                 <p class="w3-text-grey"><input type="text" name="username" placeholder="Username"></p><br>
