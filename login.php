@@ -40,6 +40,13 @@
             display: flex;
             justify-content: center;
         }
+        .error {
+            background: #F1DEDE;
+            color: #A84442;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -65,8 +72,15 @@
             <form action="login_process.php" method="post">
                 <h1 class="w3-center">Login</h1><br>
 
+                <!-- Error message -->
+                <?php if (isset($_GET['error'])) { ?>
+                <p class="error"><?php echo $_GET['error'] ?>
+                <?php } ?>
                 <?php
-                if (isset($_GET['error'])) { }
+                if (isset($_GET['error'])) {
+                    echo "</p>";
+                    echo "<br>";
+                }
                 ?>
             
                 <label><h4>Username</h4></label>
