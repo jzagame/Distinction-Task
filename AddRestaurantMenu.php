@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    error_reporting(0);
+?>
 <html>
     <head>
         <title>Add Menu</title>
@@ -15,6 +19,7 @@
             
         </style>
     </head>
+    <script src="./js/AddResMenu.js"></script>
     <body>
         <?php 
             include "menu.php";
@@ -22,12 +27,12 @@
         <div class="container-fluid" style="width:95%">
             <div class="row">
                 <div class="col-xl-12 my-auto">
-                    <form method="POST" action="./Alex/AddMenu.php">
+                    <form method="POST" action="./Alex/AddMenu.php" enctype="multipart/form-data">
                         <table border="0" style="width: 100%;">
                             <tr>
                                 <td colspan="2" style="height: 300px;">
-                                    <div id="upload-image preview">
-
+                                    <div>
+                                        <img id="imagepreview" src="" alt="image preview" height="300px">
                                     </div>
                                 </td>
                             </tr>
@@ -35,7 +40,7 @@
                                 <td colspan="2">
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile02" name="menu_image" onchange="Preview()" required>
                                             <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -48,7 +53,10 @@
                                 <td class="tdname">Menu Name</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" class="form-control" aria-label="Default" name="menu-name" aria-describedby="inputGroup-sizing-default" 
+                                        value="<?php if($_SESSION['m']['mn'] != null){
+                                            echo $_SESSION['m']['mn'];
+                                        } ?>" required>
                                     </div>
                                 </td>
                             </tr>
@@ -56,7 +64,10 @@
                                 <td class="tdname">Price</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                        <input type="text" class="form-control" aria-label="Default" name="menu-price" aria-describedby="inputGroup-sizing-default" 
+                                        value="<?php if($_SESSION['m']['mp'] != null){
+                                            echo $_SESSION['m']['mp'];
+                                        } ?>" required>
                                     </div>
                                 </td>
                             </tr>
@@ -64,7 +75,7 @@
                                 <td class="tdname">Ingredients</td>
                                 <td>
                                     <div class="input-group">
-                                        <textarea class="form-control" aria-label="With textarea" style="height: 150px;"></textarea>
+                                        <textarea class="form-control" aria-label="With textarea" name="menu-ingredients" style="height: 150px;" required><?php if($_SESSION['m']['mi'] != ""){echo $_SESSION['m']['mi'];} ?></textarea>
                                     </div>
                                 </td>
                             </tr>
@@ -72,14 +83,14 @@
                                 <td class="tdname">Description</td>
                                 <td>
                                     <div class="input-group">
-                                        <textarea class="form-control" aria-label="With textarea" style="height: 150px;"></textarea>
+                                        <textarea class="form-control" aria-label="With textarea"  name="menu-description" style="height: 150px;" required> <?php if($_SESSION['m']['md'] != ""){echo $_SESSION['m']['md'];} ?></textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: center;">
-                                    <button type="submit" class="btn btn-md btn-primary" value="restaurant-submit">Submit</button>
-                                    <button type="reset" class="btn btn-md btn-primary" value="restaurant-reset">Clear</button>
+                                    <button type="submit" class="btn btn-md btn-primary" name="restaurant-submit" value="restaurant-submit">Submit</button>
+                                    <button type="reset" class="btn btn-md btn-primary" name="restaurant-reset">Clear</button>
                                 </td>
                             </tr>
                         </table>
