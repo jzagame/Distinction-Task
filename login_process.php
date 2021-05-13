@@ -3,6 +3,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
 
+    // Check if any fields are empty
     if (empty($username)) {
         header("Location: login.php?error=Please enter a username");
         exit();
