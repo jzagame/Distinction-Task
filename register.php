@@ -73,7 +73,7 @@
     <div class="w3-row w3-padding-64" id="login">
         <div class="w3-col l6 w3-padding-large">
             <form action="login_process.php" method="post">
-                <h1 class="w3-center">Login</h1><br>
+                <h1 class="w3-center">Register</h1><br>
 
                 <!-- Error message -->
                 <?php if (isset($_GET['error'])) { ?>
@@ -84,22 +84,28 @@
                     echo "<br>";
                 }
                 ?>
+
+                <label><h4>Email</h4></label>
+                <p class="w3-text-grey"><input type="text" name="email" placeholder="someone@email.com"></p><br>
             
                 <label><h4>Username</h4></label>
                 <p class="w3-text-grey"><input type="text" name="username" placeholder="Username"></p><br>
                 
                 <labeL><h4>Password</h4></labeL>
                 <p class="w3-text-grey"><input type="password" name="password" placeholder="Password"></p><br>
+
+                <labeL><h4>Confirm Password</h4></labeL>
+                <p class="w3-text-grey"><input type="password" name="confirm_password" placeholder="Password"></p><br>
                 
                 <div class="center-button">
                     <button class="w3-button w3-light-grey w3-section" type="reset">Reset</button>
                     <div class="login">
-                        <button class="w3-button w3-light-grey w3-section" type="submit">Login</button>
+                        <button class="w3-button w3-light-grey w3-section" type="submit">Register</button>
                     </div>
                 </div>
 
                 <div class="center-button">
-                    <p><a href="register.php">Click here to register an account</a></p>
+                    <p><a href="login.php">Click here to login</a></p>
                 </div>
             </form>
         </div>
