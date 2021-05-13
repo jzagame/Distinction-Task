@@ -74,11 +74,10 @@
 
                 <!-- Error message -->
                 <?php if (isset($_GET['error'])) { ?>
-                <p class="error"><?php echo $_GET['error'] ?>
+                <p class="error"><?php echo $_GET['error'] ?></p>
                 <?php } ?>
                 <?php
                 if (isset($_GET['error'])) {
-                    echo "</p>";
                     echo "<br>";
                 }
                 ?>
