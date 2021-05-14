@@ -4,7 +4,7 @@
 ?>
 <html>
     <head>
-        <title>Add Menu</title>
+        <title>Edit Menu</title>
         <style>
             table{
                 border-collapse: separate;
@@ -22,21 +22,26 @@
     <script src="./js/AddResMenu.js"></script>
     <body>
         <?php 
+            include "database.php";
             include "menu.php";
+            error_reporting(0);
+            $sql = "select * from tblresmenu where menu_id = " . $_GET['mid'];
+            $data = $conn -> query($sql);
+            $result = $data -> fetch_array(MYSQLI_ASSOC);
         ?>
         <div class="container-fluid" style="width:95%">
             <div class="row">
                 <div class="col-xl-12 pt-4" style="text-align: center;">
-                    <h3><bold>Add Restaurant Menu</bold></h3>
+                    <h3><bold>Edit Restaurant Menu</bold></h3>
                     <hr>
                 </div>
                 <div class="col-xl-12 my-auto">
-                    <form method="POST" action="./Alex/AddMenu.php" enctype="multipart/form-data">
+                    <form method="POST" action="./Alex/AddMenu.php?mid=<?php echo $_GET['mid'];?>" enctype="multipart/form-data">
                         <table border="0" style="width: 100%;">
                             <tr>
                                 <td colspan="2" style="height: 300px;">
                                     <div>
-                                        <img id="imagepreview" src="" alt="image preview" height="300px">
+                                        <img id="imagepreview" src="<?php echo $result['menu_image_path']; ?>" alt="image preview" height="300px">
                                     </div>
                                 </td>
                             </tr>
@@ -57,10 +62,7 @@
                                 <td class="tdname">Menu Name</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Default" name="menu-name" aria-describedby="inputGroup-sizing-default" 
-                                        value="<?php if($_SESSION['m']['mn'] != null){
-                                            echo $_SESSION['m']['mn'];
-                                        } ?>" required>
+                                        <input type="text" class="form-control" aria-label="Default" name="menu-name" aria-describedby="inputGroup-sizing-default" required value="<?php  echo $result['menu_name'];?>">
                                     </div>
                                 </td>
                             </tr>
@@ -68,10 +70,7 @@
                                 <td class="tdname">Price</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Default" name="menu-price" aria-describedby="inputGroup-sizing-default" 
-                                        value="<?php if($_SESSION['m']['mp'] != null){
-                                            echo $_SESSION['m']['mp'];
-                                        } ?>" required>
+                                        <input type="text" class="form-control" aria-label="Default" name="menu-price" aria-describedby="inputGroup-sizing-default" required value="<?php  echo $result['menu_price'];?>">
                                     </div>
                                 </td>
                             </tr>
@@ -79,7 +78,7 @@
                                 <td class="tdname">Ingredients</td>
                                 <td>
                                     <div class="input-group">
-                                        <textarea class="form-control" aria-label="With textarea" name="menu-ingredients" style="height: 150px;" required><?php if($_SESSION['m']['mi'] != ""){echo $_SESSION['m']['mi'];} ?></textarea>
+                                        <textarea class="form-control" aria-label="With textarea" name="menu-ingredients" style="height: 150px;" required><?php echo $result['menu_ingredients']; ?></textarea>
                                     </div>
                                 </td>
                             </tr>
@@ -87,13 +86,13 @@
                                 <td class="tdname">Description</td>
                                 <td>
                                     <div class="input-group">
-                                        <textarea class="form-control" aria-label="With textarea"  name="menu-description" style="height: 150px;" required> <?php if($_SESSION['m']['md'] != ""){echo $_SESSION['m']['md'];} ?></textarea>
+                                        <textarea class="form-control" aria-label="With textarea"  name="menu-description" style="height: 150px;" required> <?php echo $result['menu_description']; ?></textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: center;">
-                                    <button type="submit" class="btn btn-md btn-primary" name="restaurant-submit" value="restaurant-submit">Submit</button>
+                                    <button type="submit" class="btn btn-md btn-primary" name="restaurant-submit" value="restaurant-edit">Submit</button>
                                     <button type="reset" class="btn btn-md btn-primary" name="restaurant-reset">Clear</button>
                                 </td>
                             </tr>

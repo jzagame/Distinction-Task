@@ -10,6 +10,10 @@
         ?>
         <div class="container-fluid" style="width: 95%;">
             <div class="row">
+                <div class="col-xl-12 pt-4" style="text-align: center;">
+                    <h3><bold>Edit And View Restaurant Menu</bold></h3>
+                    <hr>
+                </div>
                 <div class="col-xl-12 my-auto">
                     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" style="text-align: center;">
                         <thead>
@@ -28,13 +32,6 @@
                                 $sql = "select * from tblresmenu";
                                 $data = $conn -> query($sql);
                                 $i = 0;
-                                if($data -> fetch_array(MYSQLI_ASSOC) == 0){
-                                ?>
-                            <tr>
-                                <td colspan="7">Empty Data</td>
-                            </tr>
-                                <?php
-                                }
                                 while($result = $data -> fetch_array(MYSQLI_ASSOC)){
                             ?>
                                 <tr>
@@ -44,7 +41,7 @@
                                     <td><?php echo $result['menu_description']; ?></td>
                                     <td><?php echo $result['menu_price']; ?></td>
                                     <td><a data-toggle="modal" data-target="#exampleModalCenter" onclick="SetPicture('<?php echo $result['menu_image_path']; ?>')">View</a></td>
-                                    <td><a href="#">Edit</a></td>
+                                    <td><a href="EditRestMenu.php?mid=<?php echo $result['menu_id']; ?>">Edit</a></td>
                                 </tr>
                             <?php
                                     $i++;
@@ -76,8 +73,8 @@
         </div>
         <script>
             $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
-            })
+                $('#myInput').trigger('focus');
+            });
 
             function SetPicture(x){
                 $("#view_image").attr("src", x);

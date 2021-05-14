@@ -36,4 +36,42 @@
         // header("Location: http://localhost/Distinction-Task/AddRestaurantMenu.php");
         echo "<script> document.location = '../AddRestaurantMenu.php'; </script>";
     }
+    if($_POST['restaurant-submit'] == "restaurant-edit"){
+        $sql = "select * from tblresmenu where menu_id = " . $_GET['mid'];
+        $data = $conn -> query($sql);
+        $result = $data -> fetch_array(MYSQLI_ASSOC);
+        $check = false;
+        $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+        $filename = $_FILES["menu_image"]["name"];
+        $saved_image_path = "../MenuPicture/".basename($filename);
+        $filetype = $_FILES["menu_image"]["type"];
+        //verify file extension
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(!array_key_exists($ext, $allowed)){
+            echo "<script>window.alert(' Please select a valid file format.')</script>";
+        }
+        //verify file type
+        if(in_array($filetype,$allowed)){
+            if(file_exists("../MenuPicture/" . $filename)){
+                if("MenuPicture/".$filename == $result['menu_image_path']){
+                    $check = true;
+                }else{
+                    echo "<script>window.alert('Name duplicated! ')</script>";
+                }
+            }else{
+                $check = true;
+            }
+        }
+        if($check == true){
+            $sql = "update tblresmenu set menu_name = '".$_POST['menu-name']."', menu_description = '".$_POST['menu-description']."', menu_ingredients = '".$_POST['menu-ingredients']."' ,
+            menu_price = '".$_POST['menu-price']."' where menu_id =".$_GET['mid'];
+            if(mysqli_query($conn,$sql) == true){
+                copy($_FILES["menu_image"]["tmp_name"], $saved_image_path);
+                echo "<script>window.alert('Menu Update Successfully!')</script>";
+                unset($_SESSION['m']);
+            }   
+        }
+        // header("Location: http://localhost/Distinction-Task/AddRestaurantMenu.php");
+        echo "<script> document.location = '../index.php'; </script>";
+    }
 ?>
