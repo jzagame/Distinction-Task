@@ -30,6 +30,15 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">
+                Order
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="RestaurantOrder.php">Add Order</a>
+                <a class="dropdown-item" href="#">Edit And View</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">
                 Reserve Table
             </a>
             <div class="dropdown-menu">
