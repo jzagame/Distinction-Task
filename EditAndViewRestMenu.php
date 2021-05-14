@@ -28,6 +28,13 @@
                                 $sql = "select * from tblresmenu";
                                 $data = $conn -> query($sql);
                                 $i = 0;
+                                if($data -> fetch_array(MYSQLI_ASSOC) == 0){
+                                ?>
+                            <tr>
+                                <td colspan="7">Empty Data</td>
+                            </tr>
+                                <?php
+                                }
                                 while($result = $data -> fetch_array(MYSQLI_ASSOC)){
                             ?>
                                 <tr>
