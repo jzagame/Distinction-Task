@@ -26,7 +26,7 @@
         }
         if($check == true){
             $sql = "insert into tblresmenu(menu_image_path,menu_name,menu_price,menu_description,menu_ingredients) values
-            ('".$saved_image_path."','".$_POST['menu-name']."','".$_POST['menu-price']."','".$_POST['menu-description']."','".$_POST['menu-ingredients']."')";
+            ('"."MenuPicture/".basename($filename)."','".$_POST['menu-name']."','".$_POST['menu-price']."','".$_POST['menu-description']."','".$_POST['menu-ingredients']."')";
             if(mysqli_query($conn,$sql) == true){
                 move_uploaded_file($_FILES["menu_image"]["tmp_name"], $saved_image_path);
                 echo "<script>window.alert('New Menu Create Successfully!')</script>";
