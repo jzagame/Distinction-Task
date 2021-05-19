@@ -1,9 +1,11 @@
 <?php
 
 class RegisterProcess {
-    public function validateDetails($username, $password, $confirm_password) {
+    public function validateDetails($email, $username, $password, $confirm_password) {
         // Check if any fields are empty
-        if (empty($username)) {
+        if (empty($email)) {
+            return "Please enter your email address";
+        } else if (empty($username)) {
             return "Please enter a username";
         } else if (empty($password)) {
             return "Please enter a password";
@@ -26,31 +28,4 @@ class RegisterProcess {
     }
 }
 
-if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-    $email = validate($_POST['email']);
-    $username = validate($_POST['username']);
-    $password = validate($_POST['password']);
-    $confirm_password = validate($_POST['confirm_password']);
-
-    // Check if any fields are empty
-    if (empty($email)) {
-        header("Location: Register.php?error=Please enter an email");
-        exit();
-    } else if (empty($username)) {
-        header("Location: Register.php?error=Please enter a username");
-        exit();
-    } else if (empty($password)) {
-        header("Location: Register.php?error=Please enter a password");
-        exit();
-    } else if ($password != $confirm_password) {
-        header("Location: Register.php?error=Passwords do not match");
-        exit();
-    } else {
-        echo "Valid";
-    }
-
-} else {
-    header("Location: Register.php");
-    exit();
-}
 ?>

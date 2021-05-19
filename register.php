@@ -47,6 +47,13 @@
             width: 100%;
             border-radius: 5px;
         }
+        .success {
+            background: #D3EDDA;
+            color: #3F754C;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+        }
         .login {
             padding-left: 3em;
         }
@@ -57,16 +64,47 @@
     <?php
 
     include 'RegisterProcess.php';
+    include 'db_conn.php';
     
     $validate = new RegisterProcess();
 
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-        $error_message = $validate->validateDetails($_POST['username'], $_POST['password'], $_POST['confirm_password']);
+        $error_message = $validate->validateDetails($_POST['email'], $_POST['username'], $_POST['password'], $_POST['confirm_password']);
 
         if ($error_message == "Valid") {
             $username = $validate->trimData($_POST['username']);
             $password = $validate->trimData($_POST['password']);
-            
+            $password = md5($password);
+
+            // Create a table for users if it does not exist
+            $query = "SELECT ID FROM USERS";
+            $result = mysqli_query($conn, $query);
+
+            if (empty($result)) {
+                $query = "CREATE TABLE users (
+                    ID int (11) AUTO_INCREMENT,
+                    username varchar(255) NOT NULL,
+                    password varchar(255) NOT NULL,
+                    PRIMARY KEY (ID)
+                    )";
+                $result = mysqli_query($conn, $query);
+            }
+
+            $sql = "SELECT * FROM users WHERE username='$username'";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                $error_message = "The username is taken. Please try another one";
+            } else {
+                $sql2 = "INSERT INTO users(username, password) VALUES('$username', '$password')";
+                $result2 = mysqli_query($conn, $sql2);
+
+                if ($result2) {
+                    $success_message= "Your account has been successfully created";
+                } else {
+                    $error_message = "An unknown error occured";
+                }
+            }
         }
     }
 
@@ -99,6 +137,14 @@
                 <?php } ?>
                 <?php
                 if (isset($error_message)) {
+                    echo "<br>";
+                }
+                ?>
+                <?php if (isset($success_message)) { ?>
+                <p class="success"><?php echo $success_message ?></p>
+                <?php } ?>
+                <?php
+                if (isset($success_message)) {
                     echo "<br>";
                 }
                 ?>

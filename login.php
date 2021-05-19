@@ -66,6 +66,7 @@
         if ($error_message == "Valid") {
             $username = $validate->trimData($_POST['username']);
             $password = $validate->trimData($_POST['password']);
+            $password = md5($password);
             
             // Find username and password in the database
             $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
