@@ -72,7 +72,7 @@
     <!-- Login Section -->
     <div class="w3-row w3-padding-64" id="login">
         <div class="w3-col l6 w3-padding-large">
-            <form action="LoginProcess.php->" method="post">
+            <form action="LoginProcess.php" method="post">
                 <h1 class="w3-center">Login</h1><br>
 
                 <!-- Error message -->

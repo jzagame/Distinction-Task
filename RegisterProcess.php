@@ -7,23 +7,23 @@ if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwor
 
     // Check if any fields are empty
     if (empty($email)) {
-        header("Location: register.php?error=Please enter an email");
+        header("Location: Register.php?error=Please enter an email");
         exit();
     } else if (empty($username)) {
-        header("Location: register.php?error=Please enter a username");
+        header("Location: Register.php?error=Please enter a username");
         exit();
     } else if (empty($password)) {
-        header("Location: register.php?error=Please enter a password");
+        header("Location: Register.php?error=Please enter a password");
         exit();
     } else if ($password != $confirm_password) {
-        header("Location: register.php?error=Passwords do not match");
+        header("Location: Register.php?error=Passwords do not match");
         exit();
     } else {
         echo "Valid";
     }
 
 } else {
-    header("Location: register.php");
+    header("Location: Register.php");
     exit();
 }
 

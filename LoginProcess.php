@@ -1,9 +1,6 @@
 <?php
 
 class LoginProcess {
-    private $username;
-    private $password;
-
     public function validateDetails($username, $password) {
         // Check if any fields are empty
         if (empty($username)) {
@@ -30,9 +27,9 @@ class LoginProcess {
 $validate = new LoginProcess();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    //$username = $validate->trimData($_POST['username']);
-    //$password = $validate->trimData($_POST['password']);
-    //$validate->validateDetails($username, $password);
+    $username = $validate->trimData($_POST['username']);
+    $password = $validate->trimData($_POST['password']);
+    $validate->validateDetails($username, $password);
 } else {
     header("Location: Login.php");
     exit();
