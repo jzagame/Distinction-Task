@@ -4,13 +4,12 @@ class LoginProcess {
     public function validateDetails($username, $password) {
         // Check if any fields are empty
         if (empty($username)) {
-            header("Location: login.php?error=Please enter a username");
-            exit();
+            return "Please enter a username";
         } else if (empty($password)) {
-            header("Location: login.php?error=Please enter a password");
-            exit();
+            return "Please enter a password";
         } else {
-            echo "Valid";
+            //echo "Valid";
+            return "Valid";
         }
     }
 
@@ -22,17 +21,6 @@ class LoginProcess {
 
         return $data;
     }
-}
-
-$validate = new LoginProcess();
-
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $validate->trimData($_POST['username']);
-    $password = $validate->trimData($_POST['password']);
-    $validate->validateDetails($username, $password);
-} else {
-    header("Location: Login.php");
-    exit();
 }
 
 ?>

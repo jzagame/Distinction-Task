@@ -54,6 +54,20 @@
 </head>
 <body>
 
+<?php
+
+include 'LoginProcess.php';
+
+$validate = new LoginProcess();
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $error_message = $validate->validateDetails($_POST['username'], $_POST['password']);
+    if ($error_message == "Valid") {
+        
+    }
+}
+
+?>
+
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
         <?php 
@@ -72,15 +86,15 @@
     <!-- Login Section -->
     <div class="w3-row w3-padding-64" id="login">
         <div class="w3-col l6 w3-padding-large">
-            <form action="LoginProcess.php" method="post">
+            <form action="Login.php" method="post">
                 <h1 class="w3-center">Login</h1><br>
 
                 <!-- Error message -->
-                <?php if (isset($_GET['error'])) { ?>
-                <p class="error"><?php echo $_GET['error'] ?></p>
+                <?php if (isset($error_message)) { ?>
+                <p class="error"><?php echo $error_message ?></p>
                 <?php } ?>
                 <?php
-                if (isset($_GET['error'])) {
+                if (isset($error_message)) {
                     echo "<br>";
                 }
                 ?>

@@ -1,8 +1,11 @@
 <?php
 
-class LoginProcessTest extends PHPUnit_Framework_TestCase {
-    public function testLogin() {
-        
+use PHPUnit\Framework\TestCase;
+
+class LoginProcessTest extends TestCase {
+    public function testValidateDetails() {
+        $loginProcess = new LoginProcess();
+        $this->assertEquals("Valid", $loginProcess->validateDetails("Vernon", "12345"));
     }
 }
 
