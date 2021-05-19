@@ -54,19 +54,36 @@
 </head>
 <body>
 
-<?php
+    <?php
 
-include 'LoginProcess.php';
+    include 'LoginProcess.php';
+    include 'db_conn.php';
 
-$validate = new LoginProcess();
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $error_message = $validate->validateDetails($_POST['username'], $_POST['password']);
-    if ($error_message == "Valid") {
-        
+    $validate = new LoginProcess();
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $error_message = $validate->validateDetails($_POST['username'], $_POST['password']);
+
+        if ($error_message == "Valid") {
+            $username = $validate->trimData($_POST['username']);
+            $password = $validate->trimData($_POST['password']);
+            
+            // Find username and password in the database
+            $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) === 1) {
+                $row = mysqli_fetch_assoc($result);
+
+                if ($row['username'] === $username && $row['password'] === $pass) {
+                    echo "Logged in!";
+                }
+            } else {
+                $error_message = "Incorrect username or password";
+            }
+        }
     }
-}
 
-?>
+    ?>
 
     <!-- Navbar (sit on top) -->
     <div class="w3-top">

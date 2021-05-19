@@ -54,6 +54,24 @@
 </head>
 <body>
 
+    <?php
+
+    include 'RegisterProcess.php';
+    
+    $validate = new RegisterProcess();
+
+    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
+        $error_message = $validate->validateDetails($_POST['username'], $_POST['password'], $_POST['confirm_password']);
+
+        if ($error_message == "Valid") {
+            $username = $validate->trimData($_POST['username']);
+            $password = $validate->trimData($_POST['password']);
+            
+        }
+    }
+
+    ?>
+
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
         <?php 
@@ -72,15 +90,15 @@
     <!-- Login Section -->
     <div class="w3-row w3-padding-64" id="login">
         <div class="w3-col l6 w3-padding-large">
-            <form action="RegisterProcess.php" method="post">
+            <form action="Register.php" method="post">
                 <h1 class="w3-center">Register</h1><br>
 
                 <!-- Error message -->
-                <?php if (isset($_GET['error'])) { ?>
-                <p class="error"><?php echo $_GET['error'] ?></p>
+                <?php if (isset($error_message)) { ?>
+                <p class="error"><?php echo $error_message ?></p>
                 <?php } ?>
                 <?php
-                if (isset($_GET['error'])) {
+                if (isset($error_message)) {
                     echo "<br>";
                 }
                 ?>
