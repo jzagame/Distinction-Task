@@ -40,36 +40,36 @@
 
 
     <?php
-    if($_POST['btnAddtable'])
+    if ($_POST['btnAddtable']) 
         {
-            $CheckTableSQL = "SELECT * FROM tblTable WHERE table_no = '".strtoupper(trim($_POST['txtTableno']))."'";
+            $CheckTableSQL = "SELECT * FROM tblTable WHERE table_no = '" . strtoupper(trim($_POST['txtTableno'])) . "'";
             $CheckTableResult = mysqli_query($conn, $CheckTableSQL);
-            if(mysqli_num_rows($CheckTableResult) > 0)
-			{
+        if (mysqli_num_rows($CheckTableResult) > 0) 
+            {
                 echo "<script>alert('Table NO. Exists');location='';</script>";
-            }
-            else
+        } 
+        else 
             {
                 $AddTableSQL = "INSERT INTO tblTable(table_no, table_seat, table_description)VALUES(
-                    '". strtoupper(trim($_POST['txtTableno']))."',
-                    '". trim($_POST['txtTableseat'])."',
-                    '". strtoupper(trim($_POST['txtDescription']))."'
+                    '" . strtoupper(trim($_POST['txtTableno'])) . "',
+                    '" . trim($_POST['txtTableseat']) . "',
+                    '" . strtoupper(trim($_POST['txtDescription'])) . "'
                 )";
                 $AaddTableResult = mysqli_query($conn, $AddTableSQL);
-    
-                if($AaddTableResult)
+
+            if ($AaddTableResult) 
                 {
                     echo "<script>alert('Table Added.');location='AddTable.php';</script>";
-                }
-                else
+            } 
+            else 
                 {
                     echo "<script>alert('Add Failure');location='AddTable.php';</script>";
-                }
             }
         }
-        else
+    } 
+    else 
         {
-    ?>
+        ?>
     <!-- Page content -->
     <div class="container" style="padding: 50px 0px 50px 0px;">
         <div class="container" style="padding: 20px 30px 20px 30px">
@@ -79,37 +79,49 @@
                 </div>
                 <hr class="bdr-light"> 
                 <div class="form-group row">
-                    <label class="control-label col-sm-2"><span style="color: red"> * </span><strong>Table No:</strong></label>
+                    <label class="control-label col-sm-2">
+                        <span style="color: red"> * </span>
+                        <strong>Table No:</strong>
+                    </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter Table No" name="txtTableno" required id="tableno">
+                        <input type="text" class="form-control" placeholder="Enter Table No" 
+                        name="txtTableno" required id="tableno">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="control-label col-sm-2"><span style="color: red"> * </span><strong>Seat:</strong></label>
+                    <label class="control-label col-sm-2">
+                        <span style="color: red"> * </span>
+                        <strong>Seat:</strong>
+                    </label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" placeholder="Enter Table Seat" name="txtTableseat" required id="tableseat" min="0" step="1">
+                        <input type="number" class="form-control" placeholder="Enter Table Seat" 
+                        name="txtTableseat" required id="tableseat" min="0" step="1">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="control-label col-sm-2"><strong>Description:</strong></label>
                     <div class="col-sm-10">
-                    <textarea class="form-control" placeholder="Enter Description" name="txtDescription" rows="4"></textarea>
+                    <textarea class="form-control" placeholder="Enter Description" name="txtDescription" rows="4">
+                    </textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12" align="center">
-                        <input type="submit" class="btn btn-default" name="btnAddtable" style="background-color: #333;color: white" value="Submit">
+                        <input type="submit" class="btn btn-default" name="btnAddtable" 
+                        style="background-color: #333;color: white" value="Submit">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <?php
-        }
+        <?php
+    }
     ?>
     <!-- Footer -->
     <footer class="w3-center w3-light-grey w3-padding-32 footer">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <p>Powered by 
+    <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">
+        w3.css</a></p>
     </footer>
 
 </body>
