@@ -56,6 +56,8 @@
 
     <?php
 
+    session_start();
+
     include 'LoginProcess.php';
     include 'db_conn.php';
 

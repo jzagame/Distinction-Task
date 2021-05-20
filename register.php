@@ -62,6 +62,8 @@
 <body>
 
     <?php
+    
+    session_start();
 
     include 'RegisterProcess.php';
     include 'db_conn.php';
