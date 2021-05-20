@@ -73,7 +73,7 @@
             } else {
                     echo "<script>alert('Add Failure');location='';</script>";
             }
-            }
+        }
     } elseif ($_GET['id'] != "") {
         ?>
             <div class="container" style="padding: 50px 0px 50px 0px;">
@@ -177,9 +177,9 @@
                                 </tr>
                                 </thead>
                             <?php
-                        for ($i = 0; $i < mysqli_num_rows($SearchResult); ++$i) {
+                            for ($i = 0; $i < mysqli_num_rows($SearchResult); ++$i) {
                                     $row = mysqli_fetch_array($SearchResult);
-                            ?>
+                                ?>
                                 <tbody>
                                     <tr onClick="reserve('<?php echo $row['table_no'];?>')">
                                     <td>
@@ -196,14 +196,14 @@
                                     </td>
                                     </tr>
                                 </tbody>
-                            <?php
-                        }
-                        ?>
+                                <?php
+                            }
+                            ?>
                             </table>
             </form>
         </div>
     </div>
-    <?php
+            <?php
         } else {
                 echo "<script>alert('No Table Found');location='index.php';</script>";
         }
