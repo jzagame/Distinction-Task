@@ -43,12 +43,10 @@
     if ($_POST['btnAddtable']) {
             $CheckTableSQL = "SELECT * FROM tblTable WHERE table_no = '" . strtoupper(trim($_POST['txtTableno'])) . "'";
             $CheckTableResult = mysqli_query($conn, $CheckTableSQL);
-        if (mysqli_num_rows($CheckTableResult) > 0)
-            {
+        if (mysqli_num_rows($CheckTableResult) > 0) {
                 echo "<script>alert('Table NO. Exists');location='';</script>";
         } 
-        else 
-            {
+        else {
                 $AddTableSQL = "INSERT INTO tblTable(table_no, table_seat, table_description)VALUES(
                     '" . strtoupper(trim($_POST['txtTableno'])) . "',
                     '" . trim($_POST['txtTableseat']) . "',
@@ -56,18 +54,15 @@
                 )";
                 $AaddTableResult = mysqli_query($conn, $AddTableSQL);
 
-            if ($AaddTableResult) 
-                {
+            if ($AaddTableResult) {
                     echo "<script>alert('Table Added.');location='AddTable.php';</script>";
             } 
-            else 
-                {
+            else {
                     echo "<script>alert('Add Failure');location='AddTable.php';</script>";
             }
         }
     } 
-    else 
-        {
+    else {
         ?>
     <!-- Page content -->
     <div class="container" style="padding: 50px 0px 50px 0px;">
