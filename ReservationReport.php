@@ -67,7 +67,7 @@
                             <div style="padding-bottom: 20px;">
                                 <h3><center><strong>Reservation Report</strong></center></h3>
                                 <h4><center><strong>From <?php echo $_POST['txtstartdate']?> To 
-								<?php echo $_POST['txtenddate']?></strong></center></h4>
+                                <?php echo $_POST['txtenddate']?></strong></center></h4>
                             </div>
                             <table class="table table-striped">
                             <thead>
