@@ -21,16 +21,16 @@
             padding-top:5px;
         }
     .footer {
-        	position: fixed;
-    	    left: 0;
-        	bottom: 0;
-        	width: 100%;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 100%;
         }
 </style>
 <body>
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
-        <?php 
+        <?php
             include "menu.php";
         ?>
     </div>
@@ -45,19 +45,15 @@
 
 
     <?php
-        if($_POST['btnsearch'])
-        {
+        if ($_POST['btnsearch']) {
             $count = 0;
-			if($_POST['txtstartdate'] > $_POST['txtenddate'])
-			{
+			if ($_POST['txtstartdate'] > $_POST['txtenddate']) {
 				echo "<script>alert('Invalid Date');location='';</script>";
-			}
-			else
-			{
-				$SSQL = "SELECT * FROM tblReservation WHERE reserve_date >= '".$_POST['txtstartdate']."' AND reserve_date <= '".$_POST['txtenddate']."'";
+			} else {
+				$SSQL = "SELECT * FROM tblReservation WHERE reserve_date >= '" . $_POST['txtstartdate'] . "' 
+				AND reserve_date <= '" . $_POST['txtenddate'] . "'";
 				$SResult = mysqli_query($conn, $SSQL);
-				if(mysqli_num_rows($SResult) > 0)
-				{
+				if (mysqli_num_rows($SResult) > 0) {
 	?>
 					<div class="container" style="padding: 50px 0px 50px 0px;">
 					<div class="container" style="background-color: white;padding: 20px 30px 20px 30px;	">
@@ -85,8 +81,7 @@
 								</thead>
 								<tbody>
 	<?php
-									for($i=0;$i<mysqli_num_rows($SResult);++$i)
-									{
+									for($i = 0; $i < mysqli_num_rows($SResult); ++$i) {
 										++$count;
 										$row = mysqli_fetch_array($SResult);
 	?>
@@ -119,9 +114,7 @@
     <?php
         		}
 			}
-		}
-        else
-        {
+		} else {
     ?>
 			<!-- Page content -->
 			<div class="container" style="padding: 50px 0px 50px 0px;">
@@ -132,13 +125,19 @@
 						</div>
 						<hr class="bdr-light"> 
 						<div class="form-group row">
-							<label class="control-label col-sm-2"><span style="color: red"> * </span><strong>Start Date</strong></label>
+							<label class="control-label col-sm-2">
+								<span style="color: red"> * </span>
+								<strong>Start Date</strong>
+							</label>
 							<div class="col-sm-10">
 								<input type="date" class="form-control" name="txtstartdate" required>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="control-label col-sm-2"><span style="color: red"> * </span><strong>End Date</strong></label>
+							<label class="control-label col-sm-2">
+								<span style="color: red"> * </span>
+								<strong>End Date</strong>
+							</label>
 							<div class="col-sm-10">
 								<input type="date" class="form-control" name="txtenddate" required>
 							</div>

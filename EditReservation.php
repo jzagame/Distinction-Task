@@ -120,11 +120,12 @@
                                             <option value="<?php echo $TableRow['table_no']?>" 
                                             <?php echo ($TableRow['table_no'] ==
                                             $temprow['table_no']) ?  "selected" : "" ;  ?>>
-                                            <?php echo "Table NO= " . $TableRow['table_no'] . "   " . "Seat= " . 
-                                            $TableRow['table_seat'] . "   Description= " . $TableRow['table_description'];?></option>
+                                            <?php echo "Table NO= " . $TableRow['table_no'] . "   " . "Seat= " .
+                                            $TableRow['table_seat'] . "   Description= " .
+                                            $TableRow['table_description'];?></option>
                                         <?php
                                     }
-                            }
+                                }
                                 ?>
                             </select>
                         </div>
@@ -210,9 +211,9 @@
                                         </tr>
                                         </thead>
                                     <?php
-                                for ($i = 0; $i < mysqli_num_rows($ResultSearchR); ++$i) {
+                                    for ($i = 0; $i < mysqli_num_rows($ResultSearchR); ++$i) {
                                             $row = mysqli_fetch_array($ResultSearchR);
-                                    ?>
+                                        ?>
                                             <tbody>
                                                 <tr onClick="reserve('<?php echo $row['reserve_id'];?>')">
                                                     <td>
@@ -226,9 +227,9 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                    <?php
-                                }
-                                ?>
+                                        <?php
+                                    }
+                                    ?>
                                     </table>
                                     <div class="form-group">
                                     <div class="col-sm-12" align="center">
