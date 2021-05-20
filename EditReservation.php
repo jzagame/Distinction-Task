@@ -113,19 +113,19 @@
                                 <?php
                                     $TableSQL = "SELECT * FROM tblTable";
                                     $TableResult = mysqli_query($conn, $TableSQL);
-                            if (mysqli_num_rows($TableResult) > 0) {
-                                for ($i = 0; $i < mysqli_num_rows($TableResult); ++$i) {
+                                if (mysqli_num_rows($TableResult) > 0) {
+                                    for ($i = 0; $i < mysqli_num_rows($TableResult); ++$i) {
                                             $TableRow = mysqli_fetch_array($TableResult);
-                                    ?>
+                                        ?>
                                             <option value="<?php echo $TableRow['table_no']?>" 
-                                            <?php echo ($TableRow['table_no'] == 
+                                            <?php echo ($TableRow['table_no'] ==
                                             $temprow['table_no']) ?  "selected" : "" ;  ?>>
-                                            <?php echo "Table NO= " . $TableRow['table_no'] . "   " . "Seat= " . $TableRow['table_seat'] . "   Description= 
-                                            " . $TableRow['table_description'];?></option>
+                                            <?php echo "Table NO= " . $TableRow['table_no'] . "   " . "Seat= " . 
+                                            $TableRow['table_seat'] . "   Description= " . $TableRow['table_description'];?></option>
                                         <?php
-                        }
+                                    }
                             }
-							?>
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -155,8 +155,8 @@
                             <strong>Customer Contact:</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter Contact" name="txtCuscontact" required 
-                            id="contact" value="<?php echo $temprow['cus_contact']?>">
+                            <input type="text" class="form-control" placeholder="Enter Contact" name="txtCuscontact" 
+                            required id="contact" value="<?php echo $temprow['cus_contact']?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -185,7 +185,7 @@
             $SearchR = "SELECT * FROM tblReservation WHERE cus_nric = '" . trim($_POST['txtNRIC']) . "' 
             AND reserve_status = \"ACTIVE\"";
             $ResultSearchR = mysqli_query($conn, $SearchR);
-            if(mysqli_num_rows($ResultSearchR) > 0) {
+        if (mysqli_num_rows($ResultSearchR) > 0) {
             ?>
                 <div class="container" style="padding: 50px 0px 50px 0px;">
                 <div class="container" style="padding: 20px 30px 20px 30px">
@@ -240,7 +240,7 @@
                 </div>
             </div>
             <?php
-            } else {
+        } else {
                 echo "<script>alert('No Reservation Record Found');location='';</script>";
         }
     } else {
@@ -282,7 +282,7 @@
 
 </body>
 <script>
-	$('#ic').keyup( function () {
+    $('#ic').keyup( function () {
         while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#ic').val())) {
             $('#ic').val( $('#ic').val().slice(0, -1));
         }
