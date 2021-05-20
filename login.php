@@ -98,7 +98,7 @@
                     header("Location: index.php");
                     exit();
                 } else {
-                    $error_message = "An unknown error occured";
+                    $error_message = "Incorrect username or password";
                 }
             } else {
                 $error_message = "Incorrect username or password";
