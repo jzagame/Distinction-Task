@@ -132,11 +132,11 @@
                 <h1 class="w3-center">Register</h1><br>
 
                 <!-- Error message -->
-                <?php if (isset($error_message)) { ?>
+                <?php if (isset($error_message) && $error_message != "Valid") { ?>
                 <p class="error"><?php echo $error_message ?></p>
                 <?php } ?>
                 <?php
-                if (isset($error_message)) {
+                if (isset($error_message) && $error_message != "Valid") {
                     echo "<br>";
                 }
                 ?>
