@@ -68,7 +68,21 @@
         if ($error_message == "Valid") {
             $username = $validate->trimData($_POST['username']);
             $password = $validate->trimData($_POST['password']);
-            $password = md5($password);
+            $password = $password;
+
+            // Create a table for users if it does not exist
+            $query = "SELECT ID FROM USERS";
+            $result = mysqli_query($conn, $query);
+
+            if (empty($result)) {
+                $query = "CREATE TABLE users (
+                    ID int (11) AUTO_INCREMENT,
+                    username varchar(255) NOT NULL,
+                    password varchar(255) NOT NULL,
+                    PRIMARY KEY (ID)
+                    )";
+                $result = mysqli_query($conn, $query);
+            }
             
             // Find username and password in the database
             $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
@@ -77,8 +91,14 @@
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
 
-                if ($row['username'] === $username && $row['password'] === $pass) {
-                    echo "Logged in!";
+                if ($row['username'] === $username && $row['password'] === $password) {
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['id'] = $row['ID'];
+
+                    header("Location: index.php");
+                    exit();
+                } else {
+                    $error_message = "Incorrect username or password";
                 }
             } else {
                 $error_message = "Incorrect username or password";
@@ -110,11 +130,11 @@
                 <h1 class="w3-center">Login</h1><br>
 
                 <!-- Error message -->
-                <?php if (isset($error_message)) { ?>
+                <?php if (isset($error_message) && $error_message != "Valid") { ?>
                 <p class="error"><?php echo $error_message ?></p>
                 <?php } ?>
                 <?php
-                if (isset($error_message)) {
+                if (isset($error_message) && $error_message != "Valid") {
                     echo "<br>";
                 }
                 ?>
