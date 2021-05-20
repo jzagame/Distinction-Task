@@ -86,14 +86,13 @@
                     </label>
                     <div class="col-sm-10">
                         <input type="number" class="form-control" placeholder="Enter Table Seat" 
-                        name="txtTableseat" required id="tableseat" min="0" step="1">
+                        name="txtTableseat" required id="tableseat" min="1" step="1">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="control-label col-sm-2"><strong>Description:</strong></label>
                     <div class="col-sm-10">
-                    <textarea class="form-control" placeholder="Enter Description" name="txtDescription" rows="4">
-                    </textarea>
+                    <textarea class="form-control" name="txtDescription" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
