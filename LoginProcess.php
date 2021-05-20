@@ -8,7 +8,6 @@ class LoginProcess {
         } else if (empty($password)) {
             return "Please enter a password";
         } else {
-            //echo "Valid";
             return "Valid";
         }
     }

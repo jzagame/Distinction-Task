@@ -76,7 +76,7 @@
         if ($error_message == "Valid") {
             $username = $validate->trimData($_POST['username']);
             $password = $validate->trimData($_POST['password']);
-            $password = md5($password);
+            $password = $password;
 
             // Create a table for users if it does not exist
             $query = "SELECT ID FROM USERS";
