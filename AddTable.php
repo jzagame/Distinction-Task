@@ -25,7 +25,7 @@
 <body>
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
-        <?php 
+        <?php
             include "menu.php";
         ?>
     </div>
@@ -40,7 +40,7 @@
 
 
     <?php
-        if($_POST['btnAddtable'])
+    if($_POST['btnAddtable'])
         {
             $CheckTableSQL = "SELECT * FROM tblTable WHERE table_no = '".strtoupper(trim($_POST['txtTableno']))."'";
             $CheckTableResult = mysqli_query($conn, $CheckTableSQL);
