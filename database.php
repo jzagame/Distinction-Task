@@ -33,7 +33,13 @@
             cus_contact varchar(20),
             table_no varchar(10),
             reserve_date DATE,
-            reserve_status VARCHAR(10))"
+            reserve_status VARCHAR(10))",
+        "create table if not exists tblorder(
+            order_id int auto_increment primary key,
+            cust_name varchar(40),
+            cust_ic varchar(20),
+            cust_address varchar(100),
+            cust_phone varchar(20))"
     );
 
     foreach($table as $t){
