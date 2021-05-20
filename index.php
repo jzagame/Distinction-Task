@@ -16,6 +16,8 @@ h1, h2, h3, h4, h5, h6 {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
     <?php 
+        error_reporting(0);
+        include "database.php";
         include "menu.php";
     ?>
 </div>

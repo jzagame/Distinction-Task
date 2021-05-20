@@ -14,7 +14,7 @@
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="AddRestaurantMenu.php">Add Menu</a>
-                <a class="dropdown-item" href="#">Edit & View</a>
+                <a class="dropdown-item" href="EditAndViewRestMenu.php">Edit & View</a>
             </div>
         </li>
         <li class="nav-item dropdown">
