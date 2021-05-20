@@ -10,12 +10,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script>
-		function reserve(x){
-			location = 'EditReservation.php?id='+x;
-		}
+        function reserve(x){
+            location = 'EditReservation.php?id='+x;
+        }
         function back(){
-			location = 'EditReservation.php?';
-		}
+            location = 'EditReservation.php?';
+        }
 </script>
 <style>
     label {
@@ -33,7 +33,7 @@
 <body>
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
-        <?php 
+        <?php
             include "menu.php";
         ?>
     </div>
@@ -50,13 +50,13 @@
     <?php
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $todaydate = date('Y-m-d');
-        if ($_POST['btnEditReservation']) {
+    if ($_POST['btnEditReservation']) {
             $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '" . trim($_POST['txtTable']) . "' 
             AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"";
             $CheckResult = mysqli_query($conn, $CheckSQL);
-			if (mysqli_num_rows($CheckResult) > 0) {
+        if (mysqli_num_rows($CheckResult) > 0) {
                 echo "<script>alert('Reservation fail. Date already booked.');location='';</script>";
-            } else {
+        } else {
                 $EditRSQL = "UPDATE tblReservation SET
                 cus_name = '" . strtoupper(trim($_POST['txtCusname'])) . "',
                 cus_nric = '" . trim($_POST['txtCusNRIC']) . "',
@@ -66,22 +66,22 @@
                 WHERE reserve_id = '" . $_POST['txtReserveID'] . "'
                 ";
                 $EditResult = mysqli_query($conn, $EditRSQL);
-                if ($EditResult) {
+            if ($EditResult) {
                     echo "<script>alert('Edit Reservation Successfully');location='EditReservation.php';</script>";
-                } else {
+            } else {
                     echo "<script>alert('Edit Failure');location='';</script>";
-                }
             }
-        } elseif ($_POST['btnCancel']) {
+        }
+    } elseif ($_POST['btnCancel']) {
             $CancelSQL = "UPDATE tblReservation SET reserve_status = \"CANCEL\" WHERE 
             reserve_id = '" . $_POST['txtReserveID'] . "'";
             $CancelResult = mysqli_query($conn, $CancelSQL);
-            if ($CancelResult) {
+        if ($CancelResult) {
                 echo "<script>alert('Reservation Cancelled');location='EditReservation.php';</script>";
-            } else {
+        } else {
                 echo "<script>alert('Cancel Failure');location='';</script>";
-            }
-        } elseif ($_GET['id'] != "") {
+        }
+    } elseif ($_GET['id'] != "") {
             $tempSQL = "SELECT * FROM tblReservation WHERE reserve_id = '" . $_GET['id'] . "'";
             $tempResult = mysqli_query($conn, $tempSQL);
             $temprow = mysqli_fetch_array($tempResult);
@@ -114,16 +114,17 @@
                                     $TableSQL = "SELECT * FROM tblTable";
                                     $TableResult = mysqli_query($conn, $TableSQL);
                             if (mysqli_num_rows($TableResult) > 0) {
-                                        for ($i=0; $i < mysqli_num_rows($TableResult); ++$i) {
+                                for ($i = 0; $i < mysqli_num_rows($TableResult); ++$i) {
                                             $TableRow = mysqli_fetch_array($TableResult);
                                     ?>
                                             <option value="<?php echo $TableRow['table_no']?>" 
-                                            <?php echo ($TableRow['table_no'] == $temprow['table_no']) ?  "selected" : "" ;  ?>>
+                                            <?php echo ($TableRow['table_no'] == 
+                                            $temprow['table_no']) ?  "selected" : "" ;  ?>>
                                             <?php echo "Table NO= " . $TableRow['table_no'] . "   " . "Seat= " . $TableRow['table_seat'] . "   Description= 
                                             " . $TableRow['table_description'];?></option>
-                                    <?php
-                                }
-                                    }
+                                        <?php
+                        }
+                            }
 							?>
                             </select>
                         </div>
