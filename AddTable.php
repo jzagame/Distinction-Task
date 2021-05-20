@@ -40,11 +40,12 @@
 
 
     <?php
-    if ($_POST['btnAddtable']) 
+    if ($_POST['btnAddtable'] )
         {
             $CheckTableSQL = "SELECT * FROM tblTable WHERE table_no = '" . strtoupper(trim($_POST['txtTableno'])) . "'";
             $CheckTableResult = mysqli_query($conn, $CheckTableSQL);
-        if (mysqli_num_rows($CheckTableResult) > 0) 
+        if (mysqli_num_rows($CheckTableResult) > 0)
+        
             {
                 echo "<script>alert('Table NO. Exists');location='';</script>";
         } 
