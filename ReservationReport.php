@@ -56,17 +56,18 @@
             if (mysqli_num_rows($SResult) > 0) {
                 ?>
                     <div class="container" style="padding: 50px 0px 50px 0px;">
-                    <div class="container" style="background-color: white;padding: 20px 30px 20px 30px;	">
+                    <div class="container" style="background-color: white;padding: 20px 30px 20px 30px;">
                         <div class="form-group">
                             <h2><center><strong>Reservation Report</strong></center></h2>
                         </div>
                         <hr class="bdr-light">
                         <div class="container-fluid" style="padding: 20px 20px 20px 20px;
-						border: thin solid #C1B6B6;width: 850px">
+                        border: thin solid #C1B6B6;width: 850px">
                             <div id="appointment">
                             <div style="padding-bottom: 20px;">
                                 <h3><center><strong>Reservation Report</strong></center></h3>
-                                <h4><center><strong>From <?php echo $_POST['txtstartdate']?> To <?php echo $_POST['txtenddate']?></strong></center></h4>
+                                <h4><center><strong>From <?php echo $_POST['txtstartdate']?> To 
+								<?php echo $_POST['txtenddate']?></strong></center></h4>
                             </div>
                             <table class="table table-striped">
                             <thead>
@@ -81,13 +82,13 @@
                                     </tr>
                             </thead>
                 <tbody>
-            <?php
-                                    for($i = 0; $i < mysqli_num_rows($SResult); ++$i) {
+                <?php
+                for ($i = 0; $i < mysqli_num_rows($SResult); ++$i) {
                                         ++$count;
                                         $row = mysqli_fetch_array($SResult);
-    ?>
+                    ?>
                                             <tr>
-                                            <td><?php echo $i+1?></td>
+                                            <td><?php echo $i + 1?></td>
                                             <td><?php echo $row['table_no']?></td>
                                             <td><?php echo $row['reserve_date']?></td>
                                             <td><?php echo $row['cus_name']?></td>
@@ -95,9 +96,9 @@
                                             <td><?php echo $row['cus_contact']?></td>
                                             <td><?php echo $row['reserve_status']?></td>
                                         </tr>
-    <?php
-                                    }
-    ?>
+                    <?php
+                }
+                ?>
                                         <tr>
                                             <td colspan="7">Total Reservation ==> <?php echo $count;?></td>
                                         </tr>
@@ -107,16 +108,17 @@
                     </div>
                     <div class="form-group" style="padding-top: 30px">
                         <div class="col-sm-12" align="center">
-                            <input type="button" class="btn btn-default" name="btnBack" style="background-color: #333;color: white" value="Back" onClick="back()">
+                            <input type="button" class="btn btn-default" name="btnBack"
+                            style="background-color: #333;color: white" value="Back" onClick="back()">
                         </div>
                     </div>
                     </div>
                     </div>
-    <?php
-                }
+                <?php
             }
-        } else {
-    ?>
+        }
+    } else {
+        ?>
             <!-- Page content -->
             <div class="container" style="padding: 50px 0px 50px 0px;">
                 <div class="container" style="padding: 20px 30px 20px 30px">
@@ -145,19 +147,20 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12" align="center">
-                                <input type="submit" class="btn btn-default" name="btnsearch" style="background-color: #333;color: white" value="Submit">
+                                <input type="submit" class="btn btn-default" name="btnsearch"
+                                style="background-color: #333;color: white" value="Submit">
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-    <?php
-        }
+        <?php
+    }
     ?>
     <!-- Footer -->
     <footer class="w3-center w3-light-grey w3-padding-32 footer">
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" 
-	title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
 
 </body>
