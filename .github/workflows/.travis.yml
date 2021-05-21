@@ -19,7 +19,11 @@ php:
   - 7.0
   # aliased to a recent hhvm version
   - hhvm
-
+on: 
+  # pull_request:
+  push:
+    branches:
+    - master
 # optionally specify a list of environments, for example to test different RDBMS
 env:
   - DB=mysql
