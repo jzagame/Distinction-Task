@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script>
-		function reserve(x){
-			location = 'ReserveTable.php?id='+x;
-		}
+        function reserve(x){
+            location = 'ReserveTable.php?id='+x;
+        }
         function back(){
-			location = 'ReserveTable.php?';
-		}
-	</script>
+            location = 'ReserveTable.php?';
+        }
+    </script>
 <style>
     label {
             font-size: 17px;
@@ -33,7 +33,7 @@
 <body>
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
-        <?php 
+        <?php
             include "menu.php";
         ?>
     </div>
@@ -50,39 +50,32 @@
     <?php
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $todaydate = date('Y-m-d');
-        if($_POST['btnReserveTable'])
-        {
-            $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '".trim($_POST['txtTableNo'])."' AND reserve_date = '".strtoupper(trim($_POST['txtDate']))."' AND reserve_status = \"ACTIVE\"";
+    if ($_POST['btnReserveTable']) {
+            $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '" . trim($_POST['txtTableNo']) . "' 
+            AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"";
             $CheckResult = mysqli_query($conn, $CheckSQL);
-			if(mysqli_num_rows($CheckResult) > 0)
-			{
+        if (mysqli_num_rows($CheckResult) > 0) {
                 echo "<script>alert('Reservation fail. Date already booked.');location='';</script>";
-            }
-            else
-            {
-                $AddReserveSQL = "INSERT INTO tblReservation(cus_name, cus_nric, cus_contact, table_no, reserve_date, reserve_status)VALUES(
-                    '". strtoupper(trim($_POST['txtCusname']))."',
-                    '". strtoupper(trim($_POST['txtCusNRIC']))."',
-                    '". trim($_POST['txtCuscontact'])."',
-                    '". strtoupper(trim($_POST['txtTableNo']))."',
-                    '". strtoupper(trim($_POST['txtDate']))."',
+        } else {
+                $AddReserveSQL = "INSERT INTO tblReservation(cus_name, cus_nric, cus_contact, table_no, 
+                reserve_date, reserve_status)VALUES(
+                    '" . strtoupper(trim($_POST['txtCusname'])) . "',
+                    '" . strtoupper(trim($_POST['txtCusNRIC'])) . "',
+                    '" . trim($_POST['txtCuscontact']) . "',
+                    '" . strtoupper(trim($_POST['txtTableNo'])) . "',
+                    '" . strtoupper(trim($_POST['txtDate'])) . "',
                     \"ACTIVE\"
                 )";
                 $AaddReservationResult = mysqli_query($conn, $AddReserveSQL);
-    
-                if($AaddReservationResult)
-                {
+
+            if ($AaddReservationResult) {
                     echo "<script>alert('Reservation Added.');location='index.php';</script>";
-                }
-                else
-                {
+            } else {
                     echo "<script>alert('Add Failure');location='';</script>";
-                }
             }
         }
-        else if($_GET['id'] != "")
-        {
-    ?>
+    } elseif ($_GET['id'] != "") {
+        ?>
             <div class="container" style="padding: 50px 0px 50px 0px;">
             <div class="container" style="padding: 20px 30px 20px 30px">
                 <form class="form-horizontal" action="" method="post">
@@ -91,53 +84,72 @@
                     </div>
                     <hr class="bdr-light"> 
                     <div class="form-group row">
-                        <label class="control-label col-sm-3"><span style="color: red"> * </span><strong>Table No</strong></label>
+                        <label class="control-label col-sm-3">
+                            <span style="color: red"> * </span>
+                            <strong>Table No</strong>
+                        </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="txtTableNo" required id="tableno" readonly value="<?php echo $_GET['id']?>">
+                            <input type="text" class="form-control" name="txtTableNo" required 
+                            id="tableno" readonly value="<?php echo $_GET['id']?>">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="control-label col-sm-3"><span style="color: red"> * </span><strong>Customer Name</strong></label>
+                        <label class="control-label col-sm-3">
+                            <span style="color: red"> * </span>
+                            <strong>Customer Name</strong>
+                        </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter Name" name="txtCusname" required id="name">
+                            <input type="text" class="form-control" placeholder="Enter Name" name="txtCusname" 
+                            required id="name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="control-label col-sm-3"><span style="color: red"> * </span><strong>Customer NRIC:</strong></label>
+                        <label class="control-label col-sm-3">
+                            <span style="color: red"> * </span>
+                            <strong>Customer NRIC:</strong>
+                        </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter NRIC" name="txtCusNRIC" required id="ic">
+                            <input type="text" class="form-control" placeholder="Enter NRIC" name="txtCusNRIC" 
+                            required id="ic">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="control-label col-sm-3"><span style="color: red"> * </span><strong>Customer Contact:</strong></label>
+                        <label class="control-label col-sm-3">
+                            <span style="color: red"> * </span>
+                            <strong>Customer Contact:</strong>
+                        </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter Contact" name="txtCuscontact" required id="contact">
+                            <input type="text" class="form-control" placeholder="Enter Contact" name="txtCuscontact" 
+                            required id="contact">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="control-label col-sm-3"><span style="color: red"> * </span><strong>Date:</strong></label>
+                        <label class="control-label col-sm-3">
+                            <span style="color: red"> * </span>
+                            <strong>Date:</strong>
+                        </label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" placeholder="Enter Date" name="txtDate" required id="date" min="<?php echo $todaydate;?>">
+                            <input type="date" class="form-control" placeholder="Enter Date" name="txtDate" 
+                            required id="date" min="<?php echo $todaydate;?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12" align="center">
-                            <input type="submit" class="btn btn-default" name="btnReserveTable" style="background-color: #333;color: white" value="Submit">
-                            <input type="button" class="btn btn-default" name="btnBack" style="background-color: #333;color: white" value="Return" onClick="back()">
+                            <input type="submit" class="btn btn-default" name="btnReserveTable" 
+                            style="background-color: #333;color: white" value="Submit">
+                            <input type="button" class="btn btn-default" name="btnBack"
+                            style="background-color: #333;color: white" value="Return" onClick="back()">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    <?php
-        }
-        else
-        {
+        <?php
+    } else {
             $SearchTablSQL = "SELECT * FROM tblTable";
             $SearchResult = mysqli_query($conn, $SearchTablSQL);
-			if(mysqli_num_rows($SearchResult) > 0)
-			{
-    ?>
+        if (mysqli_num_rows($SearchResult) > 0) {
+            ?>
     <!-- Page content -->
     <div class="container" style="padding: 50px 0px 50px 0px;">
         <div class="container" style="padding: 20px 30px 20px 30px">
@@ -148,77 +160,73 @@
                 </div>
                 <hr class="bdr-light">
                 <table class="table table-hover">
-								<thead>
-								<tr bgcolor="black" style="color:white">
-									<th>
-										NO.
-									</th>
-									<th>
-										Table No
-									</th>
-									<th>
-										Table Seat
-									</th>
-									<th>
-										Description
-									</th>
-								</tr>
-								</thead>
-							<?php
-								for($i=0;$i<mysqli_num_rows($SearchResult);++$i)
-								{
-									$row = mysqli_fetch_array($SearchResult);
-							?>
-									<tbody>
-										<tr onClick="reserve('<?php echo $row['table_no'];?>')">
-											<td>
-												<?php echo $i+1; ?>
-											</td>
-											<td>
-												<?php echo $row['table_no']; ?>
-											</td>
-											<td>
-												<?php echo $row['table_seat']; ?>
-											</td>
-											<td>
-												<?php echo $row['table_description']; ?>
-											</td>
-										</tr>
-									</tbody>
-							<?php
-								}
-							?>
-							</table>
+                                <thead>
+                                <tr bgcolor="black" style="color:white">
+                                    <th>
+                                        NO.
+                                    </th>
+                                    <th>
+                                        Table No
+                                    </th>
+                                    <th>
+                                        Table Seat
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                </tr>
+                                </thead>
+                            <?php
+                            for ($i = 0; $i < mysqli_num_rows($SearchResult); ++$i) {
+                                    $row = mysqli_fetch_array($SearchResult);
+                                ?>
+                                <tbody>
+                                    <tr onClick="reserve('<?php echo $row['table_no'];?>')">
+                                    <td>
+                                        <?php echo $i + 1; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['table_no']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['table_seat']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['table_description']; ?>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                <?php
+                            }
+                            ?>
+                            </table>
             </form>
         </div>
     </div>
-    <?php
-            }
-            else
-            {
+            <?php
+        } else {
                 echo "<script>alert('No Table Found');location='index.php';</script>";
-            }
         }
+    }
     ?>
     <!-- Footer -->
     <footer class="w3-center w3-light-grey w3-padding-32 footer">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS"
+    target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
 
 </body>
 <script>
-	$('#ic').keyup( function () {
+    $('#ic').keyup( function () {
         while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#ic').val())) {
             $('#ic').val( $('#ic').val().slice(0, -1));
         }
     });
-	
 $('#name').keyup( function () {
         while (!/^(([A-Za-z ]+)((.|,)([A-Za-z ]))?)?$/.test( $('#name').val())) {
             $('#name').val( $('#name').val().slice(0, -1));
         }
     });
-	
 $('#contact').keyup( function () {
         while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#contact').val())) {
             $('#contact').val( $('#contact').val().slice(0, -1));
