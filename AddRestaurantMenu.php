@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     error_reporting(0);
 ?>
@@ -21,7 +21,7 @@
     </head>
     <script src="./js/AddResMenu.js"></script>
     <body>
-        <?php 
+        <?php
             include "menu.php";
         ?>
         <div class="container-fluid" style="width:95%">
@@ -44,7 +44,8 @@
                                 <td colspan="2">
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile02" name="menu_image" onchange="Preview()" required>
+                                            <input type="file" class="custom-file-input" id="inputGroupFile02" 
+                                                name="menu_image" onchange="Preview()" required>
                                             <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -57,10 +58,11 @@
                                 <td class="tdname">Menu Name</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Default" name="menu-name" aria-describedby="inputGroup-sizing-default" 
-                                        value="<?php if($_SESSION['m']['mn'] != null){
+                                        <input type="text" class="form-control" aria-label="Default" name="menu-name" 
+                                            aria-describedby="inputGroup-sizing-default" 
+                                        value="<?php if($_SESSION['m']['mn'] != null) {
                                             echo $_SESSION['m']['mn'];
-                                        } ?>" required>
+                                        }  ?>" required>
                                     </div>
                                 </td>
                             </tr>
