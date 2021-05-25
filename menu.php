@@ -62,7 +62,7 @@
     <?php
     
     if (isset($_SESSION['username'])) {
-        echo '<a href="Logout.php" class="login">' . $_SESSION['username'] . '</a>';
+        echo '<a href="Account.php" class="login">' . $_SESSION['username'] . '</a>';
     } else {
         echo '<a href="login.php" class="login">Login</a>';
     }

@@ -17,7 +17,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 90vh;
         }
         form {
             width: 600px;
