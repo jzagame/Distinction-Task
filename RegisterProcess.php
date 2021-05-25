@@ -12,7 +12,7 @@ class RegisterProcess {
         } else if (empty($confirm_password)) {
             return "Please enter your confirmed password";
         } else if ($password != $confirm_password) {
-            return "Paswords do not match. Please try again";
+            return "Passwords do not match. Please try again";
         } else {
             return "Valid";
         }
