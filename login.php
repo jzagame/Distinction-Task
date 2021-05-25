@@ -77,6 +77,7 @@
             if (empty($result)) {
                 $query = "CREATE TABLE users (
                     ID int (11) AUTO_INCREMENT,
+                    email varchar(255) NOT NULL,
                     username varchar(255) NOT NULL,
                     password varchar(255) NOT NULL,
                     PRIMARY KEY (ID)
@@ -94,6 +95,7 @@
                 if ($row['username'] === $username && $row['password'] === $password) {
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['id'] = $row['ID'];
+                    $_SESSION['email'] = $row['email'];
 
                     header("Location: index.php");
                     exit();
@@ -166,7 +168,7 @@
 
     <!-- Footer -->
     <footer class="w3-center w3-light-grey w3-padding-32">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
 </body>
 </html>

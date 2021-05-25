@@ -69,13 +69,13 @@
     
     $validate = new RegisterProcess();
 
-    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
+    if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
         $error_message = $validate->validateDetails($_POST['email'], $_POST['username'], $_POST['password'], $_POST['confirm_password']);
 
         if ($error_message == "Valid") {
+            $email = $validate->trimData($_POST['email']);
             $username = $validate->trimData($_POST['username']);
             $password = $validate->trimData($_POST['password']);
-            $password = $password;
 
             // Create a table for users if it does not exist
             $query = "SELECT ID FROM USERS";
@@ -84,6 +84,7 @@
             if (empty($result)) {
                 $query = "CREATE TABLE users (
                     ID int (11) AUTO_INCREMENT,
+                    email varchar(255) NOT NULL,
                     username varchar(255) NOT NULL,
                     password varchar(255) NOT NULL,
                     PRIMARY KEY (ID)
@@ -97,7 +98,7 @@
             if (mysqli_num_rows($result) > 0) {
                 $error_message = "The username is taken. Please try another one";
             } else {
-                $sql2 = "INSERT INTO users(username, password) VALUES('$username', '$password')";
+                $sql2 = "INSERT INTO users(email, username, password) VALUES('$email', '$username', '$password')";
                 $result2 = mysqli_query($conn, $sql2);
 
                 if ($result2) {

@@ -63,6 +63,7 @@
 
     if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
+        $email = $_SESSION['email'];
     }
 
     ?>
@@ -88,15 +89,8 @@
             <form action="Logout.php" method="post">
                 <h1 class="w3-center">Account Details</h1><br>
 
-                <!-- Error message -->
-                <?php if (isset($error_message) && $error_message != "Valid") { ?>
-                <p class="error"><?php echo $error_message ?></p>
-                <?php } ?>
-                <?php
-                if (isset($error_message) && $error_message != "Valid") {
-                    echo "<br>";
-                }
-                ?>
+                <label><h4>Email</h4></label>
+                <p class="w3-text-grey"><?php echo $email ?></p><br>
             
                 <label><h4>Username</h4></label>
                 <p class="w3-text-grey"><?php echo $username ?></p><br>
@@ -106,16 +100,13 @@
                 </div>
             </form>
         </div>
-            
-        
     </div>
 
     <!-- End page content -->
-    </div>
 
     <!-- Footer -->
     <footer class="w3-center w3-light-grey w3-padding-32">
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
 </body>
 </html>
