@@ -283,16 +283,6 @@
 
 </body>
 <script>
-    $('#ic').keyup( function () {
-        while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#ic').val())) {
-            $('#ic').val( $('#ic').val().slice(0, -1));
-        }
-    });
-    $('#nric').keyup( function () {
-        while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#ic').val())) {
-            $('#ic').val( $('#ic').val().slice(0, -1));
-        }
-    });
 $('#name').keyup( function () {
         while (!/^(([A-Za-z ]+)((.|,)([A-Za-z ]))?)?$/.test( $('#name').val())) {
             $('#name').val( $('#name').val().slice(0, -1));
