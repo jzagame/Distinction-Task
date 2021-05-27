@@ -57,6 +57,7 @@
     <?php
 
     session_start();
+    error_reporting(0);
 
     include 'LoginProcess.php';
     include 'db_conn.php';

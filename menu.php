@@ -15,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- boostrap4 js-->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand -->
-    <a class="navbar-brand" href="index.php">Logo</a>
+    <a class="navbar-brand" href="index.php">Home</a>
 
   <!-- Links -->
     <ul class="navbar-nav">
@@ -42,13 +42,20 @@
                 Reserve Table
             </a>
             <div class="dropdown-menu">
+            <?php if ($_SESSION['username'] == "admin") {
+                ?>
                 <a class="dropdown-item" href="AddTable.php">Add Table</a>
+            <?php
+            }
+            ?>
                 <a class="dropdown-item" href="ReserveTable.php">Reserve Table</a>
                 <a class="dropdown-item" href="EditReservation.php">Edit/Cancel Reservation</a>
             </div>
         </li>
 
     <!-- Dropdown -->
+    <?php if ($_SESSION['username'] == "admin") {
+        ?>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop3" data-toggle="dropdown">
                 Report
@@ -57,6 +64,9 @@
                 <a class="dropdown-item" href="ReservationReport.php">Reservation Report</a>
             </div>
         </li>
+    <?php
+    }
+    ?>
     </ul>
     <div class="right-side">
     <?php

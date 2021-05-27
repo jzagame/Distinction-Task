@@ -39,12 +39,27 @@
             cust_name varchar(40),
             cust_ic varchar(20),
             cust_address varchar(100),
-            cust_phone varchar(20))"
+            cust_phone varchar(20))",
+        "CREATE TABLE if not exists users (
+            ID int (11) AUTO_INCREMENT,
+            email varchar(255) NOT NULL,
+            username varchar(255) NOT NULL,
+            password varchar(255) NOT NULL,
+            PRIMARY KEY (ID)
+            )"
     );
 
     foreach($table as $t){
         mysqli_query($conn,$t);
     }
 
+    $SQL = "SELECT * FROM users WHERE username = 'admin' AND password = '" . trim('abc123') . "'";
+    $result = mysqli_query($conn, $SQL);
+    if (mysqli_num_rows($result) > 0) {
+
+    } else {
+        $AddSQL = "INSERT INTO users(email, username, password) VALUES('admin', 'admin', '" . trim('abc123') . "')";
+        $AddResult = mysqli_query($conn, $AddSQL);
+    }
     
 ?>

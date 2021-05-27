@@ -63,6 +63,7 @@
     <?php
     
     session_start();
+    error_reporting(0);
 
     include 'RegisterProcess.php';
     include 'db_conn.php';
