@@ -10,14 +10,22 @@ class ReserveClass {
         }
     }
 
-    // Removes spaces, slashes, and special characters
-    // public function trimData($data) {
-    //     $data = trim($data);
-    //     $data = stripslashes($data);
-    //     $data = htmlspecialchars($data);
+    public function validateContact($contact) {
+        $regex = '/^[0]{1}[1]{1}[0-9]{1}-[0-9]{7}$/';
+        if (preg_match($regex, $contact)) {
+            return "Valid";
+        } else {
+            return "Invalid";
+        }
+    }
 
-    //     return $data;
-    // }
+    public function validateDate($startdate, $enddate) {
+        if ($startdate > $enddate) {
+            return "Invalid";
+        } else {
+            return "Valid";
+        }
+    }
 }
 
 ?>

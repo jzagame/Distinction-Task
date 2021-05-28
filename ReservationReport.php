@@ -2,6 +2,7 @@
     session_start();
     error_reporting(0);
     include("database.php");
+    include("ReserveClass.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,9 +46,11 @@
 
 
     <?php
+    $reserveobj = new ReserveClass();
     if ($_POST['btnsearch']) {
             $count = 0;
-        if ($_POST['txtstartdate'] > $_POST['txtenddate']) {
+            $datecheck = $reserveobj->validateDate($_POST['txtstartdate'], $_POST['txtenddate']);
+        if ($datecheck == "Invalid") {
             echo "<script>alert('Invalid Date');location='';</script>";
         } else {
             $SSQL = "SELECT * FROM tblReservation WHERE reserve_date >= '" . $_POST['txtstartdate'] . "' 

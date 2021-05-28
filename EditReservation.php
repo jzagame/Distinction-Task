@@ -2,6 +2,7 @@
     session_start();
     error_reporting(0);
     include("database.php");
+    include("ReserveClass.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,9 +51,14 @@
     <?php
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $todaydate = date('Y-m-d');
+    $reserveobj = new ReserveClass();
     if ($_POST['btnEditReservation']) {
+        $iccheck = $reserveobj->validateIC($_POST['txtCusNRIC']);
+        $contactcheck = $reserveobj->validateContact($_POST['txtCuscontact']);
+        if ($iccheck == "Valid" && $contactcheck == "Valid") {
             $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '" . trim($_POST['txtTable']) . "' 
-            AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"";
+            AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"
+            AND reserve_id <> '" . trim($_POST['txtReserveID']) . "'";
             $CheckResult = mysqli_query($conn, $CheckSQL);
         if (mysqli_num_rows($CheckResult) > 0) {
                 echo "<script>alert('Reservation fail. Date already booked.');location='';</script>";
@@ -71,6 +77,13 @@
             } else {
                     echo "<script>alert('Edit Failure');location='';</script>";
             }
+        }
+        } elseif ( $iccheck == "Invalid" && $contactcheck == "Invalid") {
+            echo "<script>alert('Invalid NRIC and Contact Format');location='';</script>";
+        } elseif ( $iccheck == "Invalid" ) {
+            echo "<script>alert('Invalid NRIC Format');location='';</script>";
+        } else {
+            echo "<script>alert('Invalid Contact Format');location='';</script>";
         }
     } elseif ($_POST['btnCancel']) {
             $CancelSQL = "UPDATE tblReservation SET reserve_status = \"CANCEL\" WHERE 
@@ -183,6 +196,11 @@
         </div>
         <?php
     } elseif ($_POST['btnSearch']) {
+        $iccheck1 = $reserveobj->validateIC($_POST['txtNRIC']);
+        if ( $iccheck1 == "Invalid")
+        {
+            echo "<script>alert('Invalid NRIC Format');location='';</script>";
+        } else {
             $SearchR = "SELECT * FROM tblReservation WHERE cus_nric = '" . trim($_POST['txtNRIC']) . "' 
             AND reserve_status = \"ACTIVE\"";
             $ResultSearchR = mysqli_query($conn, $SearchR);
@@ -244,6 +262,7 @@
         } else {
                 echo "<script>alert('No Reservation Record Found');location='';</script>";
         }
+    }
     } else {
         ?>
     <!-- Page content -->
@@ -283,16 +302,6 @@
 
 </body>
 <script>
-$('#name').keyup( function () {
-        while (!/^(([A-Za-z ]+)((.|,)([A-Za-z ]))?)?$/.test( $('#name').val())) {
-            $('#name').val( $('#name').val().slice(0, -1));
-        }
-    });
-$('#contact').keyup( function () {
-        while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#contact').val())) {
-            $('#contact').val( $('#contact').val().slice(0, -1));
-        }
-    });
 
 </script>
 </html>

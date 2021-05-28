@@ -53,14 +53,15 @@
     $todaydate = date('Y-m-d');
     $reserveobj = new ReserveClass();
     if ($_POST['btnReserveTable']) {
+        $iccheck = $reserveobj->validateIC($_POST['txtCusNRIC']);
+        $contactcheck = $reserveobj->validateContact($_POST['txtCuscontact']);
+        if ($iccheck == "Valid" && $contactcheck == "Valid") {
             $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '" . trim($_POST['txtTableNo']) . "' 
             AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"";
             $CheckResult = mysqli_query($conn, $CheckSQL);
-        if (mysqli_num_rows($CheckResult) > 0) {
+            if (mysqli_num_rows($CheckResult) > 0) {
                 echo "<script>alert('Reservation fail. Date already booked.');location='';</script>";
-        } else {
-                $iccheck = $reserveobj->validateIC($_POST['txtCusNRIC']);
-                if ($iccheck == "Valid") {
+            } else {
                     $AddReserveSQL = "INSERT INTO tblReservation(cus_name, cus_nric, cus_contact, table_no, 
                         reserve_date, reserve_status)VALUES(
                         '" . strtoupper(trim($_POST['txtCusname'])) . "',
@@ -77,10 +78,14 @@
                     } else {
                         echo "<script>alert('Add Failure');location='';</script>";
                     }
-                } else {
-                    echo "<script>alert('Invalid NRIC Format');location='';</script>";
                 }
-        }
+        } elseif ( $iccheck == "Invalid" && $contactcheck == "Invalid") {
+                        echo "<script>alert('Invalid NRIC and Contact Format');location='';</script>";
+                    } elseif ( $iccheck == "Invalid" ) {
+                        echo "<script>alert('Invalid NRIC Format');location='';</script>";
+                    } else {
+                        echo "<script>alert('Invalid Contact Format');location='';</script>";
+                    }
     } elseif ($_GET['id'] != "") {
         ?>
             <div class="container" style="padding: 50px 0px 50px 0px;">
@@ -116,7 +121,7 @@
                             <strong>Customer NRIC:</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter NRIC" name="txtCusNRIC" 
+                            <input type="text" class="form-control" placeholder="EXP : xxxxxx-xx-xxxx" name="txtCusNRIC" 
                             required id="ic">
                         </div>
                     </div>
@@ -126,7 +131,7 @@
                             <strong>Customer Contact:</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="Enter Contact" name="txtCuscontact" 
+                            <input type="text" class="form-control" placeholder="EXP : 01x-xxxxxxx" name="txtCuscontact" 
                             required id="contact">
                         </div>
                     </div>
@@ -227,11 +232,6 @@
 $('#name').keyup( function () {
         while (!/^(([A-Za-z ]+)((.|,)([A-Za-z ]))?)?$/.test( $('#name').val())) {
             $('#name').val( $('#name').val().slice(0, -1));
-        }
-    });
-$('#contact').keyup( function () {
-        while (!/^(([0-9]+)((.|,)([0-9]))?)?$/.test( $('#contact').val())) {
-            $('#contact').val( $('#contact').val().slice(0, -1));
         }
     });
 

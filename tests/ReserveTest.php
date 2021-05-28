@@ -12,12 +12,19 @@ class ReserveTest extends TestCase {
         $this->assertEquals("Invalid", $reserve->validateIC("112233-a4-5566"));
     }
 
-    // public function testTrimData() {
-    //     $loginProcess = new LoginProcess();
-    //     $this->assertEquals("Vernon", $loginProcess->trimData("  Vernon  "));
-    //     $this->assertEquals("Vernon's", $loginProcess->trimData("Vern\on\'s"));
-    //     $this->assertEquals("&lt;b&gt;Vernon&lt;/b&gt;", $loginProcess->trimData("<b>Vernon</b>"));
-    // }
+    public function testvalidateContact() {
+        $reserve = new ReserveClass();
+        $this->assertEquals("Valid", $reserve->validateContact("010-2228627"));
+        $this->assertEquals("Invalid", $reserve->validateContact("010 2228627"));
+        $this->assertEquals("Invalid", $reserve->validateContact("0102-228627"));
+        $this->assertEquals("Invalid", $reserve->validateContact("012-222-8677"));
+    }
+
+    public function testvalidateDate() {
+        $reserve = new ReserveClass();
+        $this->assertEquals("Valid", $reserve->validateDate("23/05/2021" , "24/05/2021"));
+        $this->assertEquals("Invalid", $reserve->validateDate("23/05/2021", "21/04/2021"));
+    }
 }
 
 ?>
