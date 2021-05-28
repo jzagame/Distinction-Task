@@ -2,6 +2,7 @@
     session_start();
     error_reporting(0);
     include("database.php");
+    include("ReserveClass.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,6 +51,7 @@
     <?php
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $todaydate = date('Y-m-d');
+    $reserveobj = new ReserveClass();
     if ($_POST['btnReserveTable']) {
             $CheckSQL = "SELECT * FROM tblReservation WHERE table_no = '" . trim($_POST['txtTableNo']) . "' 
             AND reserve_date = '" . strtoupper(trim($_POST['txtDate'])) . "' AND reserve_status = \"ACTIVE\"";
@@ -57,22 +59,27 @@
         if (mysqli_num_rows($CheckResult) > 0) {
                 echo "<script>alert('Reservation fail. Date already booked.');location='';</script>";
         } else {
-                $AddReserveSQL = "INSERT INTO tblReservation(cus_name, cus_nric, cus_contact, table_no, 
-                reserve_date, reserve_status)VALUES(
-                    '" . strtoupper(trim($_POST['txtCusname'])) . "',
-                    '" . strtoupper(trim($_POST['txtCusNRIC'])) . "',
-                    '" . trim($_POST['txtCuscontact']) . "',
-                    '" . strtoupper(trim($_POST['txtTableNo'])) . "',
-                    '" . strtoupper(trim($_POST['txtDate'])) . "',
-                    \"ACTIVE\"
-                )";
-                $AaddReservationResult = mysqli_query($conn, $AddReserveSQL);
+                $iccheck = $reserveobj->validateIC($_POST['txtCusNRIC']);
+                if ($iccheck == "Valid") {
+                    $AddReserveSQL = "INSERT INTO tblReservation(cus_name, cus_nric, cus_contact, table_no, 
+                        reserve_date, reserve_status)VALUES(
+                        '" . strtoupper(trim($_POST['txtCusname'])) . "',
+                        '" . strtoupper(trim($_POST['txtCusNRIC'])) . "',
+                        '" . trim($_POST['txtCuscontact']) . "',
+                        '" . strtoupper(trim($_POST['txtTableNo'])) . "',
+                        '" . strtoupper(trim($_POST['txtDate'])) . "',
+                        \"ACTIVE\"
+                    )";
+                    $AaddReservationResult = mysqli_query($conn, $AddReserveSQL);
 
-            if ($AaddReservationResult) {
-                    echo "<script>alert('Reservation Added.');location='index.php';</script>";
-            } else {
-                    echo "<script>alert('Add Failure');location='';</script>";
-            }
+                    if ($AaddReservationResult) {
+                        echo "<script>alert('Reservation Added.');location='index.php';</script>";
+                    } else {
+                        echo "<script>alert('Add Failure');location='';</script>";
+                    }
+                } else {
+                    echo "<script>alert('Invalid NRIC Format');location='';</script>";
+                }
         }
     } elseif ($_GET['id'] != "") {
         ?>
